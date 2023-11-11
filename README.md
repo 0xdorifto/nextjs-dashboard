@@ -202,16 +202,63 @@ The same hooks are used for pagination, URL needs to be updated with user input.
 - How to create dynamic route segments with specific IDs.
 - How to use the React’s `useFormStatus` hook for optimistic updates.
 
+Server Actions allow for async code directly on server (no API). They are basically
+absctractions on POST, PATCH and DELETE requests.
+
+Progressive Enhancement makes forms work even if javascript is disabled on client.
+
+Zod is the de-facto typescript validation library.
+
+If a directory is wrapped in `[]` that means the route will be dynamic. Useful
+if you want a UUID in the route, for example.
+
+To create/edit an object, follow these steps:
+
+1. Create a form
+2. Create Server Action and invoke from form
+3. Extract `formData`
+4. Validate and prepare data for database
+5. Insert data and handle errors
+6. Revalidate cache and redirect back
+
 ## 13. Handling Errors
 
 - How to use the special `error.tsx` file to catch errors in your route segments, and show a fallback UI to the user.
 - How to use the notFound function and not-found file to handle 404 errors (for resources that don’t exist).
+
+In Next.js, redirect works by throwing an error, so it must be outside `try/catch`.
+
+`error.tsx` is a file used to make errors visible to users.
+
+`notFound()` throws a 404 error.
+
+`not-found.tsx` is displayed when there is a 404 error.
 
 ## 14. Improving Accessibility
 
 - How to use `eslint-plugin-jsx-a11y` with Next.js to implement accessibility best practices.
 - How to implement server-side form validation.
 - How to use the React `useFormState` hook to handle form errors, and display them to the user.
+
+ESLint can be used to catch accessibility problems.
+
+To improve accessibility, use:
+
+- Semantic HTML (`<input>` and `<option>` instead of `<div>`)
+- Labeling (`<label>` and `htmlFor`)
+- Focus outlines
+
+`aria-labels` are detected by screen readers
+
+Form validation can be client-side or server-side. Redundancy is always safer.
+
+For client-side validation, simply use `require` on forms for mandatory fields.
+
+For server-side validation:
+
+1. Setup Zod schemas with specific errors for each field
+2. Use it in Server Actions
+3. Use `useFormState` in the form
 
 ## 15. Adding Authentication
 
@@ -220,9 +267,23 @@ The same hooks are used for pagination, URL needs to be updated with user input.
 - How to use Middleware to redirect users and protect your routes.
 - How to use React's `useFormStatus` and `useFormState` to handle pending states and form errors.
 
+NextAuth.js is a useful library that makes authentication a lot easier.
+
 ## 16. Adding Metadata
 
 - What metadata is.
 - Types of metadata.
 - How to add an Open Graph image using metadata.
 - How to add a favicon using metadata.
+
+Metadata is important for SEO and to display your webapp's URL in a fancy way.
+
+Most important metadata:
+
+- Title
+- Description
+- Keywords
+- Open Graph (makes URL pretty)
+- Favicon
+
+Next.js has a intuitive metadata API.
